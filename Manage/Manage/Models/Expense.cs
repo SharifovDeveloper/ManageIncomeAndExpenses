@@ -8,5 +8,6 @@ namespace Manage.Models
 {
     internal class Expense
     {
+
     }
 }

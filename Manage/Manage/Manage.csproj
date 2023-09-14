@@ -43,11 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ConsoleHelper.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Income.cs" />
+    <Compile Include="Modules\CategoryModule.cs" />
+    <Compile Include="Modules\ExpenseModule.cs" />
+    <Compile Include="Modules\IncomeModule.cs" />
+    <Compile Include="Modules\MainApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\DataAccessLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Manage.Modules
 {
-    internal class CategoryModul
+    internal class CategoryModule
     {
+
     }
 }
