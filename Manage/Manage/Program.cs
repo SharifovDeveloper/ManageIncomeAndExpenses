@@ -10,6 +10,7 @@ namespace Manage
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("salom");
         }
     }
 }
