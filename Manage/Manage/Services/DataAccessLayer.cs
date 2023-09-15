@@ -10,7 +10,7 @@ namespace Manage.Services
 {
     internal class DataAccessLayer
     {
-        public const string Connection_String = "Data Source=DESKTOP-B7KIDHK\\SQLEXPRESS02;Integrated Security=True";
+        public const string Connection_String = "Data Source=DESKTOP-B7KIDHK\\SQLEXPRESS02;Initial Catalog=Manage;Integrated Security=True";
 
         public static async Task ExecuteNonQueryAsync(string command)
         {
@@ -19,8 +19,7 @@ namespace Manage.Services
             try
             {
                 using (SqlConnection connection = new SqlConnection(Connection_String))
-                {
-                    await connection.OpenAsync();
+                { connection.Open();
 
                     using (SqlCommand sqlCommand = new SqlCommand(command, connection))
                     {
@@ -48,7 +47,7 @@ namespace Manage.Services
             {
                 using (SqlConnection connection = new SqlConnection(Connection_String))
                 {
-                    await connection.OpenAsync();
+                     connection.Open();
 
                     using (SqlCommand sqlCommand = new SqlCommand(command, connection))
                     {

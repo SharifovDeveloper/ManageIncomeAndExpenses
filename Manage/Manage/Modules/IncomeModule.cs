@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Manage.Modules
 {
     internal class IncomeModule
-    {
+    { 
 
     }
 }
