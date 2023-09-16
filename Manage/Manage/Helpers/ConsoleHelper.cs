@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Manage.Helpers
 {
-    internal class ConsoleHelper
+    internal static class ConsoleHelper
     {
         public static void WriteLineError(string message)
         {
@@ -47,6 +43,7 @@ namespace Manage.Helpers
 
             Console.ForegroundColor = currentColor;
         }
+
         public static int GetOptionInput()
         {
             int input;

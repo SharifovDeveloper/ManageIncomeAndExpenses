@@ -12,85 +12,84 @@ namespace Manage.Modules
         public static async Task ShowOptionsAsync()
         {
             Console.WriteLine("1. See all categories     2. Find category by id     3. Add Category");
-            Console.WriteLine("4. Update category        5.Delete Category");
+            Console.WriteLine("4. Update category        5. Delete Category");
 
-            int input = ConsoleHelper.GetOptionInput();
+            int selectedOption = ConsoleHelper.GetOptionInput();
             Console.Clear();
 
-            switch (input)
+            switch (selectedOption)
             {
                 case 1:
-                    await GetAllCategoriesAsync();
+                    await DisplayAllCategoriesAsync();
                     break;
                 case 2:
-                    await GetCategoryByIdAsync();
+                    await DisplayCategoryByIdAsync();
                     break;
                 case 3:
-                    await CreateCategoryModuleAsync();
+                    await CreateCategoryAsync();
                     break;
+
                 default:
                     return;
             }
         }
 
-        public static async Task GetAllCategoriesAsync()
+        public static async Task DisplayAllCategoriesAsync()
         {
-            List<Category> categories = await CategoryService.GetAlLCategoriesAsync();
-
+            Console.WriteLine("disp");
+            List<Category> categories = await CategoryService.DisplayAllCategoriesAsync();
+            Console.WriteLine("list");
             foreach (var category in categories)
             {
                 Console.WriteLine(category);
             }
 
-            Console.Write("Enter any key to continue");
             Console.ReadKey();
         }
 
-        private static async Task CreateCategoryModuleAsync()
+        private static async Task CreateCategoryAsync()
         {
-            Console.WriteLine("Please, enter category values below.");
+            Console.WriteLine("Please enter category information below.");
             Console.WriteLine();
 
             string categoryName = null;
             do
             {
-                Console.Write("Enter new category name: ");
+                Console.Write("Enter the new category name: ");
                 categoryName = Console.ReadLine();
             }
-            while (categoryName == null);
+            while (string.IsNullOrEmpty(categoryName));
 
-            await CategoryService.CreateCategory(new Models.Category(categoryName));
+            await CategoryService.CreateCategory(new Category(categoryName));
 
-            Console.Write("Enter any key to continue");
+            Console.Write("Category created successfully. Press any key to continue...");
             Console.ReadKey();
         }
 
-        private static async Task GetCategoryByIdAsync()
+        private static async Task DisplayCategoryByIdAsync()
         {
-            Console.Write("Enter id: ");
+            Console.Write("Enter the category ID: ");
 
-            int input;
-            while (!int.TryParse(Console.ReadLine(), out input))
+            if (!int.TryParse(Console.ReadLine(), out int categoryId))
             {
-                Console.Clear();
-                Console.Write("Please, enter correct value.");
-                Console.Write("Enter id: ");
+                ConsoleHelper.WriteLineError("Invalid input. Please enter a valid category ID.");
+                return;
             }
 
-            Category category = await CategoryService.GetCategoryById(input);
+            Category category = await CategoryService.GetCategoryById(categoryId);
 
             if (category is null)
             {
-                ConsoleHelper.WriteLineError($"Category with id: {input} does not exist.");
+                ConsoleHelper.WriteLineError($"Category with ID {categoryId} does not exist.");
             }
             else
             {
                 Console.WriteLine(category);
             }
 
-            Console.Write("Enter any key to continue");
             Console.ReadKey();
         }
 
     }
 }
+

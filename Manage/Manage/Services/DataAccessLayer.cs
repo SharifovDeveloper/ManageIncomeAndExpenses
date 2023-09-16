@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Manage.Services
 {
-    internal class DataAccessLayer
+    internal static class DataAccessLayer
     {
         public const string Connection_String = "Data Source=DESKTOP-B7KIDHK\\SQLEXPRESS02;Initial Catalog=Manage;Integrated Security=True";
 
@@ -19,23 +17,23 @@ namespace Manage.Services
             try
             {
                 using (SqlConnection connection = new SqlConnection(Connection_String))
-                { connection.Open();
+                {
+                    connection.Open();
 
                     using (SqlCommand sqlCommand = new SqlCommand(command, connection))
                     {
                         int affectedRows = await sqlCommand.ExecuteNonQueryAsync();
-
                         ConsoleHelper.WriteSuccess($"Number of affected rows: {affectedRows}");
                     }
                 }
             }
             catch (SqlException ex)
             {
-                ConsoleHelper.WriteLineError($"Database error: {ex.Message}.");
+                HandleDatabaseError(ex);
             }
             catch (Exception ex)
             {
-                ConsoleHelper.WriteLineError($"Something went wrong: {ex.Message}.");
+                HandleGeneralError(ex);
             }
         }
 
@@ -47,23 +45,22 @@ namespace Manage.Services
             {
                 using (SqlConnection connection = new SqlConnection(Connection_String))
                 {
-                     connection.Open();
+                    connection.Open();
 
                     using (SqlCommand sqlCommand = new SqlCommand(command, connection))
                     {
                         var dataReader = await sqlCommand.ExecuteReaderAsync();
-
                         return converter(dataReader);
                     }
                 }
             }
             catch (SqlException ex)
             {
-                ConsoleHelper.WriteLineError($"Database error: {ex.Message}.");
+                HandleDatabaseError(ex);
             }
             catch (Exception ex)
             {
-                ConsoleHelper.WriteLineError($"Something went wrong: {ex.Message}.");
+                HandleGeneralError(ex);
             }
 
             return default;
@@ -75,6 +72,16 @@ namespace Manage.Services
             {
                 throw new ArgumentNullException(nameof(str));
             }
+        }
+
+        private static void HandleDatabaseError(SqlException ex)
+        {
+            ConsoleHelper.WriteLineError($"Database error: {ex.Message}.");
+        }
+
+        private static void HandleGeneralError(Exception ex)
+        {
+            ConsoleHelper.WriteLineError($"Something went wrong: {ex.Message}.");
         }
     }
 }
