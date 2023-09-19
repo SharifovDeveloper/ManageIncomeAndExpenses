@@ -1,4 +1,6 @@
-﻿namespace Manage.Models
+﻿using System;
+
+namespace Manage.Models
 {
     public class Category
     {
@@ -21,6 +23,8 @@
         }
 
         public override string ToString() => $"Id: {Id}, Name: {Name}";
+
+       
     }
 }
 

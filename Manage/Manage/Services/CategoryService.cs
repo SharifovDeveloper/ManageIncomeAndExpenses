@@ -10,7 +10,7 @@ namespace Manage.Services
     {
         private const string TABLE_NAME = "dbo.Category";
 
-        public static async Task<List<Category>> DisplayAllCategoriesAsync()
+        public static async Task<List<Category>> GetAllCategoriesAsync()
         {
             string query = $"SELECT * FROM {TABLE_NAME};";
             return await DataAccessLayer.ExecuteQueryAsync(query, ReaderToCategoryList);

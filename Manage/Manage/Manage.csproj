@@ -55,6 +55,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\DataAccessLayer.cs" />
+    <Compile Include="Services\ExpenseService.cs" />
+    <Compile Include="Services\IncomeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

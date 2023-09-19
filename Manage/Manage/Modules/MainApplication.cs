@@ -15,6 +15,12 @@ namespace Manage.Modules
 
             switch (input)
             {
+                case 1:
+                    await IncomeModule.ShowOptionsAsync();
+                    break;
+                case 2:
+                    await ExpenseModule.ShowOptionsAsync();
+                    break;
                 case 3:
                     await CategoryModule.ShowOptionsAsync();
                     break;
